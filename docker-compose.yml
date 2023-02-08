@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  api:
+    container_name: controle_ponto_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - /usr/src/app/node_modules
+      - .:/usr/src/app
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+    command: yarn start:dev
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: always
+    container_name: controle_ponto_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - /data/postgres:/data/postgres
+
+volumes:
+  controle_ponto_postgres:
