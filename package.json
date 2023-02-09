@@ -16,6 +16,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "migrate": "npx prisma migrate dev && npx prisma generate",
+    "migrate:ci": "npx prisma migrate deploy && npx prisma generate",
+    "docker:dev": "yarn migrate && yarn start:dev",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",

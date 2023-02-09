@@ -13,6 +13,6 @@ services:
       - .env
     environment:
       DATABASE_URL: file:./dev.db
-    command: yarn start:dev
+    command: yarn docker:dev
     ports:
       - '3000:3000'

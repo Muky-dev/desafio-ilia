@@ -15,7 +15,6 @@ RUN yarn install --frozen-lockfile
 
 COPY --chown=node:node . .
 
-RUN yarn run migrate
 
 
 # Build for production
@@ -32,10 +31,10 @@ COPY --chown=node:node yarn.lock ./
 
 RUN yarn install --frozen-lockfile --production
 RUN yarn cache clean
-RUN yarn prisma migrate deploy
+RUN npx prisma migrate deploy
 
 COPY --chown=node:node . .
-RUN yarn run prisma:generate
+RUN npx prisma generate
 RUN yarn build
 
 
