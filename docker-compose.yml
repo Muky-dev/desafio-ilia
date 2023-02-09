@@ -12,24 +12,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public&connect_timeout=300
+      DATABASE_URL: file:./dev.db
     command: yarn start:dev
     ports:
       - '3000:3000'
-    depends_on:
-      - postgres
-
-  postgres:
-    image: postgres:14
-    restart: always
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - '5432:5432'
-    volumes:
-      - controle_ponto_postgres:/data/postgres
-
-volumes:
-  controle_ponto_postgres:

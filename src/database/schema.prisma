@@ -4,19 +4,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-model Alocacoes {
+model Alocacao {
   id     Int    @id @default(autoincrement())
-  nomeProjeto String @db.VarChar(255)
-  dia    DateTime @db.Date
-  tempo  String @db.VarChar(255)
+  nomeProjeto String
+  dia    String
+  tempo  String
 }
 
-model Batidas {
+model BatidaPonto {
   id     Int    @id @default(autoincrement())
-  dia    DateTime @db.Date
-  horario  String @db.VarChar(255)
+  dia    String
+  horario  String
 }

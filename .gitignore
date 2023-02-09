@@ -37,3 +37,11 @@ lerna-debug.log*
 # ENV
 .env
 .env.local
+
+# Sqlite
+*.sqlite
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.db-shm-journal
