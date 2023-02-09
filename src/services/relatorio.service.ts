@@ -73,13 +73,13 @@ export class RelatorioService {
     };
   }
 
-  validarMes(mes: string) {
+  validarMes(mes: string): void {
     if (!mes) throw new BadRequestException('Mês não informado');
     const mesFormatado = dayjs(mes, 'YYYY-MM');
     if (!mesFormatado.isValid()) throw new BadRequestException('Mês inválido');
   }
 
-  agruparBatidas(batidas: BatidaPonto[]) {
+  agruparBatidas(batidas: BatidaPonto[]): IBatida[] {
     return batidas.reduce((acc, batida) => {
       const dia = dayjs(batida.dia).format('YYYY-MM-DD');
       acc.find((batida) => batida.dia === dia)
@@ -92,7 +92,7 @@ export class RelatorioService {
     }, [] as IBatida[]);
   }
 
-  calcularTempoTrabalhado(batidas: IBatida[]) {
+  calcularTempoTrabalhado(batidas: IBatida[]): number {
     const diasCompletos = batidas.filter(
       (batida) => batida.horarios.length === 4,
     );
