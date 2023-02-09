@@ -11,12 +11,12 @@ datasource db {
 model Alocacao {
   id     Int    @id @default(autoincrement())
   nomeProjeto String
-  dia    String
-  tempo  String
+  dia    DateTime
+  tempo  Int
 }
 
 model BatidaPonto {
   id     Int    @id @default(autoincrement())
-  dia    String
+  dia    DateTime
   horario  String
 }

@@ -1,26 +1,32 @@
 import { Controller, Get, Post, Param, Body } from '@nestjs/common';
-import { AppService } from './app.service';
 
 import { AlocarDto } from './dto/alocar.dto';
-import { BatidaDto } from './dto/batida.dto';
-import { IAlocacao, IBatida } from './interfaces';
+import { BatidaDto } from './dto/ponto.dto';
+import { IAlocacao, IBatida, IRelatorioMensal } from './interfaces';
+import { AlocacaoService } from './services/alocacao.service';
+import { PontoService } from './services/ponto.service';
+import { RelatorioService } from './services/relatorio.service';
 
 @Controller('v1')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly pontoService: PontoService,
+    private readonly alocacaoSerice: AlocacaoService,
+    private readonly relatorioService: RelatorioService,
+  ) {}
 
   @Post('batidas')
   batida(@Body() batidaDto: BatidaDto): Promise<IBatida> {
-    return this.appService.baterPonto(batidaDto);
+    return this.pontoService.baterPonto(batidaDto);
   }
 
   @Post('alocacoes')
   alocar(@Body() alocarDto: AlocarDto): Promise<IAlocacao> {
-    return this.appService.alocar(alocarDto);
+    return this.alocacaoSerice.alocar(alocarDto);
   }
 
   @Get('folhas-de-ponto/:mes')
-  relatorioMensal(@Param('mes') mes: string): Promise<string> {
-    return this.appService.relatorioMensal(mes);
+  relatorioMensal(@Param('mes') mes: string): Promise<IRelatorioMensal> {
+    return this.relatorioService.relatorioMensal(mes);
   }
 }

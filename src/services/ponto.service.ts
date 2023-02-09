@@ -1,21 +1,23 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   ConflictException,
   ForbiddenException,
 } from '@nestjs/common/exceptions';
 
 import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+
+dayjs.extend(duration);
 
 import { PrismaService } from './prisma.service';
 
-import { BatidaDto } from './dto/batida.dto';
-import { AlocarDto } from './dto/alocar.dto';
+import { BatidaDto } from '../dto/ponto.dto';
 
-import { IAlocacao, IBatida } from './interfaces';
+import { IBatida } from '../interfaces';
 import { BatidaPonto } from '@prisma/client';
 
 @Injectable()
-export class AppService {
+export class PontoService {
   constructor(private prisma: PrismaService) {}
 
   async baterPonto(batidaDto: BatidaDto): Promise<IBatida> {
@@ -32,7 +34,7 @@ export class AppService {
 
     const batidasDoDia: BatidaPonto[] = await this.prisma.batidaPonto.findMany({
       where: {
-        dia: data,
+        dia: dayjs(data).toDate(),
       },
       orderBy: {
         dia: 'asc',
@@ -62,7 +64,7 @@ export class AppService {
 
     const batidaCriada = await this.prisma.batidaPonto.create({
       data: {
-        dia: data,
+        dia: dayjs(data).toDate(),
         horario: horario,
       },
     });
@@ -72,16 +74,8 @@ export class AppService {
     );
 
     return {
-      dia: batidaCriada.dia,
+      dia: dayjs(batidaCriada.dia).format('YYYY-MM-DD'),
       horarios: horariosOrdenados,
     };
-  }
-
-  async alocar(alocarDto: AlocarDto): Promise<IAlocacao> {
-    throw new NotImplementedException();
-  }
-
-  async relatorioMensal(mes: string): Promise<string> {
-    throw new NotImplementedException();
   }
 }
