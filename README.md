@@ -25,8 +25,10 @@ Recomendo o uso do [NVM](https://github.com/nvm-sh/nvm) para gerenciar as versõ
 # Comece clonando o repositório:
 $ git clone https://github.com/Muky-dev/desafio-ilia
 
+# Entre no diretório do projeto:
+$ cd desafio-ilia
 
-# Copie o arquivo .env.example para .env.
+# Copie o arquivo .env.example para .env
 $ cp .env.example .env
 ```
 
