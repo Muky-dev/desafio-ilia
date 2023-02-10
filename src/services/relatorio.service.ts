@@ -38,7 +38,7 @@ export class RelatorioService {
     ]);
 
     if (!alocacoesMes.length && !batidasMes.length)
-      throw new BadRequestException('Relatório não encontrado');
+      throw new Error('Relatório não encontrado');
 
     const totalAlocado = alocacoesMes.reduce(
       (total, alocacao) => total + alocacao.tempo,
@@ -74,9 +74,9 @@ export class RelatorioService {
   }
 
   validarMes(mes: string): void {
-    if (!mes) throw new BadRequestException('Mês não informado');
+    if (!mes) throw new Error('Mês não informado');
     const mesFormatado = dayjs(mes, 'YYYY-MM');
-    if (!mesFormatado.isValid()) throw new BadRequestException('Mês inválido');
+    if (!mesFormatado.isValid()) throw new Error('Mês inválido');
   }
 
   agruparBatidas(batidas: BatidaPonto[]): IBatida[] {

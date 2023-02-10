@@ -28,7 +28,7 @@ export class PontoService {
     const diaDaSemana: number = dataHora.day();
 
     if (diaDaSemana === 0 || diaDaSemana === 6)
-      throw new ForbiddenException(
+      throw new Error(
         'Sábado e domingo não são permitidos como dia de trabalho',
       );
 
@@ -42,9 +42,7 @@ export class PontoService {
     });
 
     if (batidasDoDia.length >= 4)
-      throw new ForbiddenException(
-        'Apenas 4 horários podem ser registrados por dia',
-      );
+      throw new Error('Apenas 4 horários podem ser registrados por dia');
 
     const horarios = batidasDoDia.map((batida) => batida.horario);
 
@@ -58,9 +56,8 @@ export class PontoService {
         dayjs(`${batidasDoDia[1].dia}T${batidasDoDia[1].horario}`),
         'hour',
       ) < 1
-    ) {
+    )
       throw new ForbiddenException('Deve haver no mínimo 1 hora de almoço');
-    }
 
     const batidaCriada = await this.prisma.batidaPonto.create({
       data: {

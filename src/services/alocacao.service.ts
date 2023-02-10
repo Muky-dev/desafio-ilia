@@ -35,13 +35,13 @@ export class AlocacaoService {
 
   validarAlocacao(alocarDto: AlocarDto) {
     const alocacaoDia = dayjs(alocarDto.dia, 'YYYY-MM-DD');
-    if (!alocacaoDia.isValid()) throw new BadRequestException('Data inválida');
+    if (!alocacaoDia.isValid()) throw new Error('Data inválida');
 
     const alocacaoTempo = dayjs.duration(alocarDto.tempo);
     const alocacaoMilisegundos = alocacaoTempo.asMilliseconds();
 
     if (Number.isNaN(alocacaoMilisegundos) || alocacaoMilisegundos < 1)
-      throw new BadRequestException('Tempo inválido');
+      throw new Error('Tempo inválido');
   }
 
   transformarAlocacao(alocacao: Alocacao): IAlocacao {
