@@ -12,7 +12,7 @@ export interface IAlocacao {
 export interface IRelatorioMensal {
   mes: string;
   horasTrabalhadas: string;
-  horasExcendentes: string;
+  horasExcedentes: string;
   horasDevidas: string;
   registros: IBatida[];
   alocacoes: Partial<IAlocacao>[];

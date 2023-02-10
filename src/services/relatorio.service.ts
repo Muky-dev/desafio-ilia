@@ -50,7 +50,7 @@ export class RelatorioService {
     return {
       mes,
       horasTrabalhadas: dayjs.duration(totalTrabalhado).toISOString(),
-      horasExcendentes: dayjs
+      horasExcedentes: dayjs
         .duration(
           totalTrabalhado - totalAlocado < 0
             ? 0
