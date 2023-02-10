@@ -21,7 +21,7 @@ export class AlocacaoService {
     const alocacaoDia = dayjs(alocarDto.dia, 'YYYY-MM-DD');
     const alocacaoTempo = dayjs.duration(alocarDto.tempo);
     const alocacaoMilisegundos = alocacaoTempo.asMilliseconds();
-    const batidasDoDia = await this.prisma.alocacao.findMany({
+    const batidasDoDia = await this.prisma.batidaPonto.findMany({
       where: {
         dia: alocacaoDia.toDate(),
       },
