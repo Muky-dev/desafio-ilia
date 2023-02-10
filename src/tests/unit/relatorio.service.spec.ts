@@ -84,5 +84,14 @@ describe('Relatorio', () => {
       const result = await relatorioService.relatorioMensal('2023-02');
       expect(result).toEqual(expected);
     });
+
+    it('Deve retornar erro quando não encontrar o relatório', async () => {
+      prisma.alocacao.findMany = jest.fn().mockReturnValueOnce([]);
+      prisma.batidaPonto.findMany = jest.fn().mockReturnValueOnce([]);
+
+      await expect(
+        relatorioService.relatorioMensal('2023-02'),
+      ).rejects.toThrowError('Relatório não encontrado');
+    });
   });
 });
