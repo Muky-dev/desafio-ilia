@@ -15,7 +15,7 @@ export class RelatorioFilter implements ExceptionFilter {
 
     switch (mensagem) {
       case 'Relatório não encontrado':
-        status = 400;
+        status = 404;
         break;
 
       case 'Mês não informado':
