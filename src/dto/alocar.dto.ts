@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class AlocarDto {
   @IsNotEmpty({ message: 'Campo obrigatório não informado: dia' })
