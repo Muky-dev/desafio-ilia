@@ -21,6 +21,18 @@ export class AlocacaoService {
     const alocacaoDia = dayjs(alocarDto.dia, 'YYYY-MM-DD');
     const alocacaoTempo = dayjs.duration(alocarDto.tempo);
     const alocacaoMilisegundos = alocacaoTempo.asMilliseconds();
+    const batidasDoDia = await this.prisma.alocacao.findMany({
+      where: {
+        dia: alocacaoDia.toDate(),
+      },
+      orderBy: {
+        dia: 'asc',
+      },
+    });
+
+    if (!batidasDoDia.length)
+      throw new Error('Dia sem horas trabalhadas, não é possível alocar');
+
     const alocacaoCriada: Alocacao = await this.prisma.alocacao.create({
       data: {
         dia: alocacaoDia.toDate(),

@@ -22,6 +22,10 @@ export class AlocacaoFilter implements ExceptionFilter {
         status = 400;
         break;
 
+      case 'Dia sem horas trabalhadas, não é possível alocar':
+        status = 400;
+        break;
+
       default:
         status = ctxStatus;
         break;
