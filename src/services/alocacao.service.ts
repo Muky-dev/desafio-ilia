@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { BadRequestException } from '@nestjs/common/exceptions';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
