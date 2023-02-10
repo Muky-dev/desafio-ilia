@@ -1,8 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import {
-  ConflictException,
-  ForbiddenException,
-} from '@nestjs/common/exceptions';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -47,7 +43,7 @@ export class PontoService {
     const horarios = batidasDoDia.map((batida) => batida.horario);
 
     if (horarios.includes(horario)) {
-      throw new ConflictException('Horário já registrado');
+      throw new Error('Horário já registrado');
     }
 
     if (
@@ -57,7 +53,7 @@ export class PontoService {
         'hour',
       ) < 1
     )
-      throw new ForbiddenException('Deve haver no mínimo 1 hora de almoço');
+      throw new Error('Deve haver no mínimo 1 hora de almoço');
 
     const batidaCriada = await this.prisma.batidaPonto.create({
       data: {
