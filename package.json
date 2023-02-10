@@ -5,6 +5,9 @@
   "author": "Gabriel Fini",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "18.14.0"
+  },
   "prisma": {
     "schema": "src/database/schema.prisma"
   },
