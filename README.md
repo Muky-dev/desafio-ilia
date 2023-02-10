@@ -43,14 +43,15 @@ $ yarn migrate
 $ yarn start:dev
 ```
 
-Caso haja algum problema para rodar o projeto, sugiro utilizar o docker-compose.
+Caso haja algum problema para rodar o projeto (ou se preferir mesmo), sugiro utilizar o docker-compose.
 
 ```bash
 # Inicie o docker-compose
 $ docker-compose up
 ```
 
-o servidor iniciará na porta:3000 - acesse <http://localhost:3000>
+O servidor iniciará na porta:3000 - acesse <http://localhost:3000>
+A documentação da API estará disponível em <http://localhost:3000/swagger>
 
 ## 2. Testes
 
